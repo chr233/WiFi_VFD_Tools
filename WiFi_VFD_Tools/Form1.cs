@@ -28,6 +28,11 @@ namespace WiFi_VFD_Tools
             String conn_password = registry.GetValue("conn_password", "CHR233").ToString();
             txt_conn_passwd.Text = conn_password;
 
+                
+            String txt_string =registry.GetValue("txt_string", "hello world").ToString();
+            txt_text_string.Text = txt_string;
+            txt_proc_string.Text = txt_string;
+
             cb_mode.SelectedIndex = 0;
             cb_text_mode.SelectedIndex = 0;
         }
@@ -106,9 +111,6 @@ namespace WiFi_VFD_Tools
                 return false;
             }
         }
-
-
-
 
         private void ts_lbl3_Click(object sender, EventArgs e)
         {
@@ -234,6 +236,7 @@ namespace WiFi_VFD_Tools
             if (chk_text_string_flash.Checked)
             {
                 args.Add("f", "1");
+                registry.SetValue("txt_string", txt_text_string.Text);
             }
             args.Add("w", txt_text_string.Text);
             exec_cmd("/set/text/group", true, args);
@@ -301,6 +304,7 @@ namespace WiFi_VFD_Tools
             if (chk_proc_text_flash.Checked)
             {
                 args.Add("f", "1");
+                registry.SetValue("txt_string", txt_proc_string.Text);
             }
             args.Add("w", txt_proc_string.Text);
             exec_cmd("/set/proc/string", true, args);
